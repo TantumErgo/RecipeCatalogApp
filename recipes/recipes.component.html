@@ -1,0 +1,33 @@
+<h2>My Recipes</h2>
+<div>
+  <label>Recipe Name:
+    <input #recipeName />
+  </label>
+  <!-- (click) passes input value to Add() and then clears the input -->
+  <button (click)="Add(recipeName.value); recipeName.value=''">
+    Add
+  </button>
+</div>
+<ul class="recipes">
+  <li *ngFor="let recipe of recipes">
+    <a routerLink="/detail/{{recipe.id}}">
+      <span class="badge">{{recipe.id}}</span> {{recipe.name}}
+    </a>
+    <button class="delete" title="Delete Recipe"
+      (click)="Delete(recipe)">x</button>
+  </li>
+</ul>
+<!--  -->
+<div class="row">
+  <div class="col-md-5">
+    <app-recipe-list></app-recipe-list>
+  </div>
+  <div class="col-md-7">
+    <router-outlet></router-outlet>
+  </div>
+</div>
+<!-- <app-recipe-detail [recipeToDisplay]="selectedRecipe"></app-recipe-detail> 
+  This is a one way databinding from the selectedRecipe property of
+  RecipesComponent.ts to the recipeToDisplay property of the target
+  element, which maps to the recipeToDisplay property of the
+  RecipeDetailComponent-->
